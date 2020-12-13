@@ -103,6 +103,7 @@
     <Image Include="chainmail.png" />
     <Image Include="dirt.png" />
     <Image Include="hedge.png" />
+    <Image Include="Treasure room.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="triangles.frag" />
