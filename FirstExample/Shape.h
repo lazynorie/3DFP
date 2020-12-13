@@ -205,53 +205,7 @@ struct Cube : public Shape
 {
 	Cube(int scale = 1)
 	{
-		// Normal cube, no cloned vertices:
-		//shape_indices = {
-		//	 Front.
-		//	0, 1, 2,
-		//	2, 3, 0,
-		//	 Left.
-		//	4, 0, 3,
-		//	3, 7, 4,
-		//	 Bottom.
-		//	5, 1, 0,
-		//	0, 4, 5,
-		//	 Right.
-		//	6, 2, 1,
-		//	1, 5, 6,
-		//	 Back.
-		//	7, 6, 5,
-		//	5, 4, 7,
-		//	 Top.
-		//	3, 2, 6,
-		//	6, 7, 3
-		//};
-		//shape_vertices = {
-		//	0.0f, 0.0f, 1.0f,		// 0.
-		//	1.0f, 0.0f, 1.0f,		// 1.
-		//	1.0f, 1.0f, 1.0f,		// 2.
-		//	0.0f, 1.0f, 1.0f,		// 3.
-		//	0.0f, 0.0f, 0.0f,		// 4.
-		//	1.0f, 0.0f, 0.0f,		// 5.
-		//	1.0f, 1.0f, 0.0f,		// 6.
-		//	0.0f, 1.0f, 0.0f,		// 7.
-		//};
-		//shape_uvs = {
-		//	0.0f, 0.0f,		// 0.
-		//	3.0f, 0.0f,		// 1.
-		//	3.0f, 1.0f,		// 2.
-		//	0.0f, 1.0f,		// 3.
-		//	3.0f, 0.0f,		// 4.
-		//	0.0f, 0.0f,		// 5.
-		//	0.0f, 1.0f,		// 6.
-		//	3.0f, 1.0f		// 7.
-		//};
-		// Cube with all separate faces:
-		/*for (int i = 0; i < shape_vertices.size(); i += 3)
-		{
-			shape_uvs.push_back(shape_vertices[i]);
-			shape_uvs.push_back(shape_vertices[i + 1]);
-		}*/
+		
 		shape_indices = {
 			// Front.
 			0, 1, 2,

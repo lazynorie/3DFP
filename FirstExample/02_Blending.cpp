@@ -59,7 +59,7 @@ GLfloat pitch, yaw;
 int lastX, lastY;
 
 // Texture variables.
-GLuint firstTx, secondTx, blankTx;
+GLuint firstTx, secondTx, blankTx, brickTx;
 GLint width, height, bitDepth;
 
 // Light variables.
@@ -70,7 +70,7 @@ void timer(int);
 
 void resetView()
 {
-	position = glm::vec3(5.0f, 3.0f, 10.0f);
+	position = glm::vec3(10.0f, 10.0f, 10.0f);
 	frontVec = glm::vec3(0.0f, 0.0f, -1.0f);
 	worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	pitch = 0.0f;
@@ -79,10 +79,12 @@ void resetView()
 }
 
 // Shapes. Recommend putting in a map
-Cube g_cube(3);
+Cube g_cube(25);
 Prism g_prism(24);
 //Plane g_plane;
-Grid g_grid(10,3); // New UV scale parameter. Works with texture now.
+Grid g_grid(25,1); // New UV scale parameter. Works with texture now.
+Cube g_wall(25);
+Cube g_pillar(1);
 
 void init(void)
 {
@@ -132,8 +134,8 @@ void init(void)
 	unsigned char* image2 = stbi_load("chainmail.png", &width, &height, &bitDepth, 0);
 	if (!image) cout << "Unable to load file!" << endl;
 
-	glGenTextures(1, &secondTx);
-	glBindTexture(GL_TEXTURE_2D, secondTx);
+	glGenTextures(1, &brickTx);
+	glBindTexture(GL_TEXTURE_2D, brickTx);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image2);
 	// Note: image types with native transparency will need to be GL_RGBA instead of GL_RGB.
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -143,6 +145,8 @@ void init(void)
 	glGenerateMipmap(GL_TEXTURE_2D);
 	//glBindTexture(GL_TEXTURE_2D, 0);
 	stbi_image_free(image2);
+
+	
 
 	// Third texture. Blank one.
 	unsigned char* image3 = stbi_load("blank.jpg", &width, &height, &bitDepth, 0);
@@ -158,6 +162,22 @@ void init(void)
 	glGenerateMipmap(GL_TEXTURE_2D);
 	//glBindTexture(GL_TEXTURE_2D, 0);
 	stbi_image_free(image3);
+
+	// Brick texure
+	unsigned char* image4 = stbi_load("brick.jpg", &width, &height, &bitDepth, 0);
+	if (!image4) cout << "Unable to load file!" << endl;
+
+	glGenTextures(1, &brickTx);
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image4);
+	// Note: image types with native transparency will need to be GL_RGBA instead of GL_RGB.
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	stbi_image_free(image4);
 
 	glUniform1i(glGetUniformLocation(program, "texture0"), 0);
 
@@ -262,20 +282,33 @@ void display(void)
 
 	//glEnable(GL_DEPTH_TEST);
 
+	//ground(grid)
 	glBindTexture(GL_TEXTURE_2D, firstTx);
 	g_grid.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, -90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
 	glDrawElements(GL_TRIANGLES, g_grid.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
-	glBindTexture(GL_TEXTURE_2D, blankTx);
-	g_prism.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(0.75f, 0.75f, 0.75f), X_AXIS, 0.0f, glm::vec3(5.125f, 0.0f, -1.875f));
-	glDrawElements(GL_TRIANGLES, g_prism.NumIndices(), GL_UNSIGNED_SHORT, 0);
-
-	glBindTexture(GL_TEXTURE_2D, secondTx);
-	g_cube.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(5.0f, 0.0f, -2.0f));
+	//walls
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(25.0f, 3.0f, 0.25f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f));
 	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(25.0f, 3.0f, 0.25f), Y_AXIS, 90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
+	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(25.0f, 3.0f, 0.25f), Y_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, -25.0f));
+	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(25.0f, 3.0f, 0.25f), Y_AXIS, -90.0f, glm::vec3(25.0f, 0.0f, -25.0f));
+	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	
 	
 	glBindVertexArray(0); // Done writing.
 	glutSwapBuffers(); // Now for a potentially smoother render.
@@ -414,6 +447,8 @@ void clean()
 	glDeleteTextures(1, &firstTx);
 	glDeleteTextures(1, &secondTx);
 	glDeleteTextures(1, &blankTx);
+	//glDeleteTextures(1, &brickTx);
+
 }
 
 //---------------------------------------------------------------------
@@ -426,7 +461,7 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
 	glutSetOption(GLUT_MULTISAMPLE, 8);
 	glutInitWindowSize(1024, 1024);
-	glutCreateWindow("GAME2012 - Week 7");
+	glutCreateWindow("Final Project");
 
 	glewInit();	//Initializes the glew and prepares the drawing pipeline.
 	init();
