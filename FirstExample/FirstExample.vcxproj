@@ -102,7 +102,10 @@
     <Image Include="brick.jpg" />
     <Image Include="chainmail.png" />
     <Image Include="dirt.png" />
+    <Image Include="gate.png" />
     <Image Include="hedge.png" />
+    <Image Include="stairs.jpg" />
+    <Image Include="stairs.png" />
     <Image Include="Treasure room.png" />
   </ItemGroup>
   <ItemGroup>

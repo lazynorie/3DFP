@@ -59,7 +59,7 @@ GLfloat pitch, yaw;
 int lastX, lastY;
 
 // Texture variables.
-GLuint firstTx, secondTx, blankTx, brickTx ,hedgeTx,roomTx;
+GLuint firstTx, secondTx, blankTx, brickTx , hedgeTx, roomTx, GateTx, StairTx;
 GLint width, height, bitDepth;
 
 // Light variables.
@@ -70,7 +70,7 @@ void timer(int);
 
 void resetView()
 {
-	position = glm::vec3(10.0f, 10.0f, 10.0f);
+	position = glm::vec3(12.5f, 1.0f, 3.0f);
 	frontVec = glm::vec3(0.0f, 0.0f, -1.0f);
 	worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	pitch = 0.0f;
@@ -86,6 +86,8 @@ Cube g_wall(15);
 Cube g_gatehouse(10);
 Cube m_wall(5);
 Cone t_top(5);
+Cube g_gate(1);
+Plane g_stair;
 
 void init(void)
 {
@@ -131,8 +133,8 @@ void init(void)
 	//glBindTexture(GL_TEXTURE_2D, 0);
 	stbi_image_free(image);
 
-	// Second texture. 
-	unsigned char* image2 = stbi_load("chainmail.png", &width, &height, &bitDepth, 0);
+	// Second texture. stairs
+	unsigned char* image2 = stbi_load("stairs.png", &width, &height, &bitDepth, 0);
 	if (!image) cout << "Unable to load file!" << endl;
 
 	glGenTextures(1, &secondTx);
@@ -195,6 +197,7 @@ void init(void)
 	//glBindTexture(GL_TEXTURE_2D, 0);
 	stbi_image_free(image5);
 
+	//6th
 	unsigned char* image6 = stbi_load("Treasure room.png", &width, &height, &bitDepth, 0);
 	if (!image6) cout << "Unable to load file!" << endl;
 
@@ -208,6 +211,23 @@ void init(void)
 	glGenerateMipmap(GL_TEXTURE_2D);
 	//glBindTexture(GL_TEXTURE_2D, 0);
 	stbi_image_free(image6);
+
+	//7th image gate
+	unsigned char* image7 = stbi_load("gate.png", &width, &height, &bitDepth, 0);
+	if (!image7) cout << "Unable to load file!" << endl;
+
+	glGenTextures(1, &GateTx);
+	glBindTexture(GL_TEXTURE_2D, GateTx);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image7);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	stbi_image_free(image7);
+
+	
 
 	glUniform1i(glGetUniformLocation(program, "texture0"), 0);
 
@@ -305,7 +325,7 @@ void display(void)
 	glBindVertexArray(vao);
 	// Draw all shapes.
 
-	/*glBindTexture(GL_TEXTURE_2D, alexTx);
+	/*glBindTexture(GL_TEXTURE_2D, GateTx);
 	g_plane.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(10.0f, 10.0f, 1.0f), X_AXIS, -90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
 	glDrawElements(GL_TRIANGLES, g_plane.NumIndices(), GL_UNSIGNED_SHORT, 0);*/
@@ -318,6 +338,7 @@ void display(void)
 	transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, -90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
 	glDrawElements(GL_TRIANGLES, g_grid.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
+	
 
 	//towers
 	glBindTexture(GL_TEXTURE_2D, brickTx);
@@ -372,6 +393,22 @@ void display(void)
 	transformObject(glm::vec3(25.0f, 2.0f, 0.5f), Y_AXIS, -90.0f, glm::vec3(25.0f, 0.0f, -25.0f));
 	glDrawElements(GL_TRIANGLES, g_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
+	//Gate
+	glBindTexture(GL_TEXTURE_2D, GateTx);
+	g_gate.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(1.5f, 2.5f, 0.1f), X_AXIS, 0.0f, glm::vec3(11.0f, 0.0f, 0.0f));
+	glDrawElements(GL_TRIANGLES, g_gate.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, GateTx);
+	g_gate.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(1.5f, 2.5f, 0.1f), X_AXIS, 0.0f, glm::vec3(12.5f, 0.0f, 0.0f));
+	glDrawElements(GL_TRIANGLES, g_gate.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	//stairs
+	glBindTexture(GL_TEXTURE_2D, secondTx);
+	g_stair.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(3.0f, 3.0f, 1.0f), X_AXIS, -80.0f, glm::vec3(11.0f, -0.5f, 3.0f));
+	glDrawElements(GL_TRIANGLES, g_stair.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	//gatehouse
 	glBindTexture(GL_TEXTURE_2D, brickTx);
@@ -773,6 +810,9 @@ void clean()
 	glDeleteTextures(1, &brickTx);
 	glDeleteTextures(1, &hedgeTx);
 	glDeleteTextures(1, &roomTx);
+	glDeleteTextures(1, &GateTx);
+	glDeleteTextures(1, &StairTx);
+
 }
 
 //---------------------------------------------------------------------
