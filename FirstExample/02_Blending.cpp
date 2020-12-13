@@ -70,10 +70,10 @@ DirectionalLight dLight(glm::vec3(-1.0f, 0.0f, -0.5f), // Direction.
 	0.5f);						  // Diffuse strength.
 
 PointLight pLights[5] = { { glm::vec3(-1.0f, 6.0f, -1.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f },
-						  { glm::vec3(24.0f, 6.0f, -26.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f },
-						  { glm::vec3(-1.0f, 6.0f, -26.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f} ,
 						  { glm::vec3(24.0f, 6.0f, -1.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f },
-						  { glm::vec3(2.5f, 0.5f, -5.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f } };
+                          { glm::vec3(-1.0f, 6.0f, -26.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f},
+						  { glm::vec3(24.0f, 6.0f, -26.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f },
+						  { glm::vec3(12.5f, 0.5f, -12.5f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f } };
 
 
 
@@ -671,7 +671,7 @@ void display(void)
 	//*Brick wall
 	glBindTexture(GL_TEXTURE_2D, roomTx);
 	m_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(4.0f, 1.0f, 0.3f), Y_AXIS, 90.0f, glm::vec3(14.5f, 0.0f, -10.5f));
+	transformObject(glm::vec3(2.0f, 1.0f, 0.3f), Y_AXIS, 90.0f, glm::vec3(14.5f, 0.0f, -12.5f));
 	glDrawElements(GL_TRIANGLES, m_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 

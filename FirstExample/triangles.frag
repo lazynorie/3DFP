@@ -1,7 +1,7 @@
 #version 430 core
 
 #ifndef NUM_POINT_LIGHTS
-    #define NUM_POINT_LIGHTS 2
+    #define NUM_POINT_LIGHTS 5
 #endif
 
 in vec4 colour;
