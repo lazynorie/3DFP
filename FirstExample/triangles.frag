@@ -4,7 +4,7 @@
     #define NUM_POINT_LIGHTS 2
 #endif
 
-in vec3 colour;
+in vec4 colour;
 in vec2 texCoord;
 in vec3 normal;
 in vec3 fragPos;
@@ -119,7 +119,7 @@ vec4 calcSpotLight(SpotLight s)
 
 void main()
 {
-	vec4 calcColour = vec4(0,0,0,0);
+	vec4 calcColour = vec4(0,0,0,1);
 	
 	vec4 ambient = vec4(aLight.ambientColour, 1.0f) * aLight.ambientStrength;
 	calcColour += ambient;
@@ -128,5 +128,5 @@ void main()
 		calcColour += calcPointLight(pLights[i]);
 	calcColour += calcSpotLight(sLight);
 	
-	frag_colour = texture(texture0, texCoord) * vec4(colour, 1.0f) * calcColour;
+	frag_colour = texture(texture0, texCoord) * colour * calcColour;
 }
