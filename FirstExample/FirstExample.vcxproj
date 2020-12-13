@@ -102,6 +102,7 @@
     <Image Include="brick.jpg" />
     <Image Include="chainmail.png" />
     <Image Include="dirt.png" />
+    <Image Include="hedge.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="triangles.frag" />
