@@ -64,7 +64,18 @@ GLint width, height, bitDepth;
 
 // Light variables.
 AmbientLight aLight(glm::vec3(1.0f, 1.0f, 1.0f),	// Ambient colour.
-	1.0f);							// Ambient strength.
+	0.5f);							// Ambient strength.
+DirectionalLight dLight(glm::vec3(-1.0f, 0.0f, -0.5f), // Direction.
+	glm::vec3(1.0f, 1.0f, 0.25f),  // Diffuse colour.
+	0.5f);						  // Diffuse strength.
+
+PointLight pLights[5] = { { glm::vec3(-1.0f, 6.0f, -1.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f },
+						  { glm::vec3(24.0f, 6.0f, -26.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f },
+						  { glm::vec3(-1.0f, 6.0f, -26.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f} ,
+						  { glm::vec3(24.0f, 6.0f, -1.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f },
+						  { glm::vec3(2.5f, 0.5f, -5.0f), 10.0f, glm::vec3(1.0f, 1.0f, 1.0f), 10.0f } };
+
+
 
 void timer(int);
 
@@ -94,8 +105,8 @@ void init(void)
 	srand((unsigned)time(NULL));
 	//Specifying the name of vertex and fragment shaders.
 	ShaderInfo shaders[] = {
-		{ GL_VERTEX_SHADER, "triangles2.vert" },
-		{ GL_FRAGMENT_SHADER, "triangles2.frag" },
+		{ GL_VERTEX_SHADER, "triangles.vert" },
+		{ GL_FRAGMENT_SHADER, "triangles.frag" },
 		{ GL_NONE, NULL }
 	};
 
@@ -234,6 +245,50 @@ void init(void)
 	// Setting ambient Light.
 	glUniform3f(glGetUniformLocation(program, "aLight.ambientColour"), aLight.ambientColour.x, aLight.ambientColour.y, aLight.ambientColour.z);
 	glUniform1f(glGetUniformLocation(program, "aLight.ambientStrength"), aLight.ambientStrength);
+	// Setting directional light.
+	glUniform3f(glGetUniformLocation(program, "dLight.base.diffuseColour"), dLight.diffuseColour.x, dLight.diffuseColour.y, dLight.diffuseColour.z);
+	glUniform1f(glGetUniformLocation(program, "dLight.base.diffuseStrength"), dLight.diffuseStrength);
+
+	glUniform3f(glGetUniformLocation(program, "dLight.direction"), dLight.direction.x, dLight.direction.y, dLight.direction.z);
+
+	// Setting point lights.
+	glUniform3f(glGetUniformLocation(program, "pLights[0].base.diffuseColour"), pLights[0].diffuseColour.x, pLights[0].diffuseColour.y, pLights[0].diffuseColour.z);
+	glUniform1f(glGetUniformLocation(program, "pLights[0].base.diffuseStrength"), pLights[0].diffuseStrength);
+	glUniform3f(glGetUniformLocation(program, "pLights[0].position"), pLights[0].position.x, pLights[0].position.y, pLights[0].position.z);
+	glUniform1f(glGetUniformLocation(program, "pLights[0].constant"), pLights[0].constant);
+	glUniform1f(glGetUniformLocation(program, "pLights[0].linear"), pLights[0].linear);
+	glUniform1f(glGetUniformLocation(program, "pLights[0].exponent"), pLights[0].exponent);
+
+	glUniform3f(glGetUniformLocation(program, "pLights[1].base.diffuseColour"), pLights[1].diffuseColour.x, pLights[1].diffuseColour.y, pLights[1].diffuseColour.z);
+	glUniform1f(glGetUniformLocation(program, "pLights[1].base.diffuseStrength"), pLights[1].diffuseStrength);
+	glUniform3f(glGetUniformLocation(program, "pLights[1].position"), pLights[1].position.x, pLights[1].position.y, pLights[1].position.z);
+	glUniform1f(glGetUniformLocation(program, "pLights[1].constant"), pLights[1].constant);
+	glUniform1f(glGetUniformLocation(program, "pLights[1].linear"), pLights[1].linear);
+	glUniform1f(glGetUniformLocation(program, "pLights[1].exponent"), pLights[1].exponent);
+
+	glUniform3f(glGetUniformLocation(program, "pLights[2].base.diffuseColour"), pLights[2].diffuseColour.x, pLights[2].diffuseColour.y, pLights[2].diffuseColour.z);
+	glUniform1f(glGetUniformLocation(program, "pLights[2].base.diffuseStrength"), pLights[2].diffuseStrength);
+	glUniform3f(glGetUniformLocation(program, "pLights[2].position"), pLights[2].position.x, pLights[2].position.y, pLights[2].position.z);
+	glUniform1f(glGetUniformLocation(program, "pLights[2].constant"), pLights[2].constant);
+	glUniform1f(glGetUniformLocation(program, "pLights[2].linear"), pLights[2].linear);
+	glUniform1f(glGetUniformLocation(program, "pLights[2].exponent"), pLights[2].exponent);
+
+	glUniform3f(glGetUniformLocation(program, "pLights[3].base.diffuseColour"), pLights[3].diffuseColour.x, pLights[3].diffuseColour.y, pLights[3].diffuseColour.z);
+	glUniform1f(glGetUniformLocation(program, "pLights[3].base.diffuseStrength"), pLights[3].diffuseStrength);
+	glUniform3f(glGetUniformLocation(program, "pLights[3].position"), pLights[3].position.x, pLights[3].position.y, pLights[3].position.z);
+	glUniform1f(glGetUniformLocation(program, "pLights[3].constant"), pLights[3].constant);
+	glUniform1f(glGetUniformLocation(program, "pLights[3].linear"), pLights[3].linear);
+	glUniform1f(glGetUniformLocation(program, "pLights[3].exponent"), pLights[3].exponent);
+
+	glUniform3f(glGetUniformLocation(program, "pLights[4].base.diffuseColour"), pLights[4].diffuseColour.x, pLights[4].diffuseColour.y, pLights[4].diffuseColour.z);
+	glUniform1f(glGetUniformLocation(program, "pLights[4].base.diffuseStrength"), pLights[4].diffuseStrength);
+	glUniform3f(glGetUniformLocation(program, "pLights[4].position"), pLights[4].position.x, pLights[4].position.y, pLights[4].position.z);
+	glUniform1f(glGetUniformLocation(program, "pLights[4].constant"), pLights[4].constant);
+	glUniform1f(glGetUniformLocation(program, "pLights[4].linear"), pLights[4].linear);
+	glUniform1f(glGetUniformLocation(program, "pLights[4].exponent"), pLights[4].exponent);
+
+
+
 
 	vao = 0;
 	glGenVertexArrays(1, &vao);
@@ -266,6 +321,7 @@ void init(void)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
+	glBlendEquation(GL_FUNC_ADD);
 	// Enable smoothing.
 	glEnable(GL_LINE_SMOOTH);
 	glEnable(GL_POLYGON_SMOOTH);
@@ -331,6 +387,7 @@ void display(void)
 	glDrawElements(GL_TRIANGLES, g_plane.NumIndices(), GL_UNSIGNED_SHORT, 0);*/
 
 	//glEnable(GL_DEPTH_TEST);
+
 
 	//ground(grid)
 	glBindTexture(GL_TEXTURE_2D, firstTx);
