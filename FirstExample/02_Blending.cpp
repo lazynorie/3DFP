@@ -80,7 +80,7 @@ void resetView()
 
 // Shapes. Recommend putting in a map
 Cube g_cube(15);
-Prism g_tower(12);
+Prism g_tower(24);
 Grid g_grid(25,1); // New UV scale parameter. Works with texture now.
 Cube g_wall(15);
 Cube g_gatehouse(10);
@@ -223,7 +223,7 @@ void init(void)
 	glBindVertexArray(0); // Can optionally unbind the vertex array to avoid modification.
 
 	// Change shape data.
-	//g_tower.SetMat(1.0, 16);
+	g_tower.SetMat(0.1, 16);
 	g_grid.SetMat(0.0, 16);
 
 	// Enable depth test and blend.
@@ -306,29 +306,35 @@ void display(void)
 
 
 	//towers
-	glBindTexture(GL_TEXTURE_2D, firstTx);
+	glBindTexture(GL_TEXTURE_2D, blankTx);
 	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(2.0f, 5.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f));
+	transformObject(glm::vec3(2.0f, 2.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f));
 	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
-	glBindTexture(GL_TEXTURE_2D, firstTx);
+	glBindTexture(GL_TEXTURE_2D, blankTx);
 	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(2.0f, 5.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, -25.0f));
+	transformObject(glm::vec3(2.0f, 2.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, -25.0f));
 	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
-	glBindTexture(GL_TEXTURE_2D, firstTx);
+	glBindTexture(GL_TEXTURE_2D, blankTx);
 	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(2.0f, 5.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, -25.0f));
+	transformObject(glm::vec3(2.0f, 2.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, -25.0f));
 	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
-	glBindTexture(GL_TEXTURE_2D, firstTx);
+	glBindTexture(GL_TEXTURE_2D, blankTx);
 	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(2.0f, 5.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, 0.0f));
+	transformObject(glm::vec3(2.0f, 2.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, 0.0f));
 	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
 	//walls
 	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(25.0f, 2.0f, 0.5f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f));
+	transformObject(glm::vec3(10.0f, 2.0f, 0.5f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f));
+	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(10.0f, 2.0f, 0.5f), X_AXIS, 0.0f, glm::vec3(15.0f, 0.0f, 0.0f));
 	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, brickTx);
@@ -356,7 +362,12 @@ void display(void)
 	//mazewall
 	glBindTexture(GL_TEXTURE_2D, hedgeTx);
 	m_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(20.0f, 1.0f, 0.3f), X_AXIS, 0.0f, glm::vec3(2.5f, 0.0f, -2.5f));
+	transformObject(glm::vec3(8.0f, 1.0f, 0.3f), X_AXIS, 0.0f, glm::vec3(2.5f, 0.0f, -2.5f));
+	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, hedgeTx);
+	m_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(8.0f, 1.0f, 0.3f), X_AXIS, 0.0f, glm::vec3(15.0f, 0.0f, -2.5f));
 	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, hedgeTx);
