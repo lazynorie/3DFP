@@ -306,95 +306,105 @@ void display(void)
 
 
 	//towers
-	glBindTexture(GL_TEXTURE_2D, blankTx);
+	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(2.0f, 2.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	transformObject(glm::vec3(2.0f, 3.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(-1.0f, 0.0f, -1.0f));
+	glDrawElements(GL_TRIANGLES, g_tower.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(2.0f, 3.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(24.0f, 0.0f, -26.0f));
+	glDrawElements(GL_TRIANGLES, g_tower.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
-	glBindTexture(GL_TEXTURE_2D, blankTx);
+	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(2.0f, 2.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, -25.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	transformObject(glm::vec3(2.0f, 3.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(-1.0f, 0.0f, -26.0f));
+	glDrawElements(GL_TRIANGLES, g_tower.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
-	glBindTexture(GL_TEXTURE_2D, blankTx);
+	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(2.0f, 2.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, -25.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
-
-	glBindTexture(GL_TEXTURE_2D, blankTx);
-	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(2.0f, 2.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, 0.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	transformObject(glm::vec3(2.0f, 3.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(24.0f, 0.0f, -1.0f));
+	glDrawElements(GL_TRIANGLES, g_tower.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	//walls
 	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(10.0f, 2.0f, 0.5f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, g_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(10.0f, 2.0f, 0.5f), X_AXIS, 0.0f, glm::vec3(15.0f, 0.0f, 0.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, g_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(25.0f, 2.0f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, g_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(25.0f, 2.0f, 0.5f), Y_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, -25.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, g_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(25.0f, 2.0f, 0.5f), Y_AXIS, -90.0f, glm::vec3(25.0f, 0.0f, -25.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, g_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 
 	//gatehouse
 	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(2.0f, 2.5f, 2.0f), X_AXIS, 0.0f, glm::vec3(9.0f, 0.0f, -1.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, g_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(2.0f, 4.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(9.0f, 0.0f, -1.0f));
+	glDrawElements(GL_TRIANGLES, g_tower.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(2.0f, 2.5f, 2.0f), X_AXIS, 0.0f, glm::vec3(14.0f, 0.0f, -1.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, g_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	g_tower.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(2.0f, 4.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(14.0f, 0.0f, -1.0f));
+	glDrawElements(GL_TRIANGLES, g_tower.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, brickTx);
 	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(7.0f, 0.5f, 2.0f), X_AXIS, 0.0f, glm::vec3(9.0f, 2.5f, -1.0f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, g_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	//mazewall
 	glBindTexture(GL_TEXTURE_2D, hedgeTx);
 	m_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(8.0f, 1.0f, 0.3f), X_AXIS, 0.0f, glm::vec3(2.5f, 0.0f, -2.5f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, m_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, hedgeTx);
 	m_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(8.0f, 1.0f, 0.3f), X_AXIS, 0.0f, glm::vec3(14.5f, 0.0f, -2.5f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, m_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, hedgeTx);
 	m_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(20.0f, 1.0f, 0.3f), Y_AXIS, 90.0f, glm::vec3(2.5f, 0.0f, -2.5f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, m_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, hedgeTx);
 	g_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(20.0f, 1.0f, 0.3f), Y_AXIS, 0.0f, glm::vec3(2.5f, 0.0f, -22.5f));
-	glDrawElements(GL_TRIANGLES, g_cube.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, m_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 
 	glBindTexture(GL_TEXTURE_2D, hedgeTx);
 	m_wall.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
 	transformObject(glm::vec3(20.0f, 1.0f, 0.3f), Y_AXIS, -90.0f, glm::vec3(22.5f, 0.0f, -22.5f));
-	glDrawElements(GL_TRIANGLES, g_grid.NumIndices(), GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, m_wall.NumIndices(), GL_UNSIGNED_SHORT, 0);
 	
 	
 	glBindVertexArray(0); // Done writing.
