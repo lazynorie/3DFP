@@ -18,10 +18,7 @@
     <ClCompile Include="LoadShaders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="01_Lights.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="02_Blending.cpp">
+    <ClCompile Include="GAME2012FinalProject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,9 +34,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="alex.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="blank.jpg">
       <Filter>Resource Files</Filter>
     </Image>
@@ -59,9 +53,6 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="gate.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="stairs.jpg">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="stairs.png">

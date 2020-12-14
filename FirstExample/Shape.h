@@ -412,6 +412,17 @@ struct Cone : public Shape
 		shape_indices.push_back(sides);
 		shape_indices.push_back(sides + 1);
 		shape_indices.push_back(1);
+		
+		for (int i = 0; i < shape_vertices.size(); i += 5)
+		{
+			shape_uvs.push_back(0.5); // No texture for grid so value doesn't matter.
+			shape_uvs.push_back(0);
+			shape_uvs.push_back(1);
+			shape_uvs.push_back(0);
+			shape_uvs.push_back(0);
+			shape_uvs.push_back(0);
+		}
+
 		ColorShape(1.0f, 1.0f, 1.0f);
 		CalcAverageNormals(shape_indices, shape_indices.size(), shape_vertices, shape_vertices.size());
 	}

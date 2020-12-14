@@ -96,7 +96,7 @@ Grid g_grid(25,1); // New UV scale parameter. Works with texture now.
 Cube g_wall(15);
 Cube g_gatehouse(10);
 Cube m_wall(5);
-Cone t_top(5);
+Cone t_top(12);
 Cube g_gate(1);
 Plane g_stair;
 
@@ -419,10 +419,25 @@ void display(void)
 	glDrawElements(GL_TRIANGLES, g_tower.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	//tower tops
-	/*glBindTexture(GL_TEXTURE_2D, brickTx);
+	glBindTexture(GL_TEXTURE_2D, brickTx);
 	t_top.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
-	transformObject(glm::vec3(2.0f, 3.0f, 2.0f), Y_AXIS, 0.0f, glm::vec3(24.0f, 3.0f, -1.0f));
-	glDrawElements(GL_TRIANGLES, t_top.NumIndices(), GL_UNSIGNED_SHORT, 0);*/
+	transformObject(glm::vec3(3.0f, 2.0f, 3.0f), Y_AXIS, 0.0f, glm::vec3(-1.5f, 3.0f, -1.5f));
+	glDrawElements(GL_TRIANGLES, t_top.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	t_top.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(3.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(23.5f, 3.0f, -26.5f));
+	glDrawElements(GL_TRIANGLES, t_top.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	t_top.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(3.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(-1.5f, 3.0f, -26.5f));
+	glDrawElements(GL_TRIANGLES, t_top.NumIndices(), GL_UNSIGNED_SHORT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, brickTx);
+	t_top.BufferShape(&ibo, &points_vbo, &colors_vbo, &uv_vbo, &normals_vbo, program);
+	transformObject(glm::vec3(3.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(23.5f, 3.0f, -1.5f));
+	glDrawElements(GL_TRIANGLES, t_top.NumIndices(), GL_UNSIGNED_SHORT, 0);
 
 	//walls
 	glBindTexture(GL_TEXTURE_2D, brickTx);

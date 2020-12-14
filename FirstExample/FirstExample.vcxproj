@@ -85,10 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="01_Lights.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="02_Blending.cpp" />
+    <ClCompile Include="GAME2012FinalProject.cpp" />
     <ClCompile Include="LoadShaders.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -97,14 +94,12 @@
     <ClInclude Include="Shape.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="alex.jpg" />
     <Image Include="blank.jpg" />
     <Image Include="brick.jpg" />
     <Image Include="chainmail.png" />
     <Image Include="dirt.png" />
     <Image Include="gate.png" />
     <Image Include="hedge.png" />
-    <Image Include="stairs.jpg" />
     <Image Include="stairs.png" />
     <Image Include="Treasure room.png" />
   </ItemGroup>
